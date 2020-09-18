@@ -51,10 +51,7 @@ userSchema
   });
 
 userSchema.methods = {
-  authenticate: (plaintext) => {
-    return this.encryptPassword(plaintext) === this.hashed_password;
-  },
-  encryptPassword: (password) => {
+  encryptPassword: function (password) {
     if (!password) return "";
     try {
       return crypto
@@ -64,6 +61,9 @@ userSchema.methods = {
     } catch (err) {
       return "";
     }
+  },
+  authenticate: function (plaintext) {
+    return this.encryptPassword(plaintext) === this.hashed_password;
   },
 };
 
