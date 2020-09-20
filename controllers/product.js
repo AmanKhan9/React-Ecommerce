@@ -3,7 +3,6 @@ const _ = require("lodash");
 const fs = require("fs");
 const Product = require("../models/Product");
 const { errorHandler } = require("../helpers/dbErrorHandler");
-const { Console } = require("console");
 
 exports.productById = (req, res, next, id) => {
   Product.findById(id).exec((err, product) => {
@@ -230,4 +229,12 @@ exports.listBySearch = (req, res) => {
         data,
       });
     });
+};
+
+exports.photo = (req, res, next) => {
+  if (req.product.photo.data) {
+    res.set("Content-type", req.product.photo.contentType);
+    return res.send(req.product.photo.data);
+  }
+  next();
 };
