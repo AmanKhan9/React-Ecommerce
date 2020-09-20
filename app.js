@@ -7,6 +7,7 @@ const productRoutes = require("./routes/product");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
 require("dotenv").config();
 
@@ -24,6 +25,7 @@ mongoose
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(cors());
 //routes and middleware
 app.use("/api", authRoutes);
 app.use("/api", userRoutes);
